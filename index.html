@@ -60,8 +60,8 @@
             ></canvas>
             <canvas
               id="othercanvas"
-              width="28"
-              height="28"
+              width="32"
+              height="32"
               style="display: none"
             ></canvas>
             <div id="resultado"></div>
@@ -173,22 +173,22 @@
 
       function predecir() {
         if (modelo != null) {
-          //Pasar canvas a version 28x28
-          resample_single(canvas, 28, 28, othercanvas);
+          //Pasar canvas a version 32x32
+          resample_single(canvas, 32, 32, othercanvas);
 
           var ctx2 = othercanvas.getContext("2d");
 
-          var imgData = ctx2.getImageData(0, 0, 28, 28);
+          var imgData = ctx2.getImageData(0, 0, 32, 32);
           var arr = []; //El arreglo completo
-          var arr28 = []; //Al llegar a arr28 posiciones se pone en 'arr' como un nuevo indice
+          var arr32 = []; //Al llegar a arr32 posiciones se pone en 'arr' como un nuevo indice
           for (var p = 0, i = 0; p < imgData.data.length; p += 4) {
             var red = imgData.data[p] / 255;
             var green = imgData.data[p + 1] / 255;
             var blue = imgData.data[p + 2] / 255;
-            arr28.push([blue, green, red]); //Agregar al arr28 y normalizar a 0-1. Aparte queda dentro de un arreglo en el indice 0... again
-            if (arr28.length == 28) {
-              arr.push(arr28);
-              arr28 = [];
+            arr32.push([blue, green, red]); //Agregar al arr32 y normalizar a 0-1. Aparte queda dentro de un arreglo en el indice 0... again
+            if (arr32.length == 32) {
+              arr.push(arr32);
+              arr32 = [];
             }
           }
 
